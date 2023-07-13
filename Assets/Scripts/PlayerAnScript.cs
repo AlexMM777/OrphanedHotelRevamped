@@ -17,7 +17,7 @@ public class PlayerAnScript : MonoBehaviour
     {
         if (canMove)
         {
-            if (playerController.GetComponent<FirstPersonAIO>().staminaInternal <= 0)
+            if (!playerController.GetComponent<PlayerMovement>().isSprinting)
             {
                 m_Animator.SetBool("isRunning", false);
             }
@@ -49,7 +49,7 @@ public class PlayerAnScript : MonoBehaviour
 
             if (m_Animator.GetBool("isGoingForward") == true || m_Animator.GetBool("isGoingBack") == true)
             {
-                if (playerController.GetComponent<FirstPersonAIO>().staminaInternal >= 0)
+                if (playerController.GetComponent<PlayerMovement>().isSprinting)
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
@@ -59,7 +59,7 @@ public class PlayerAnScript : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.LeftShift))
             {
-                if (playerController.GetComponent<FirstPersonAIO>().staminaInternal > 0)
+                if (playerController.GetComponent<PlayerMovement>().isSprinting)
                 {
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                     {
@@ -92,13 +92,13 @@ public class PlayerAnScript : MonoBehaviour
 
 
         m_Animator.SetBool("isAgainstWall", !canMove);
-        m_Animator.SetBool("isOnFloor", playerController.GetComponent<FirstPersonAIO>().IsGrounded);
+        m_Animator.SetBool("isOnFloor", playerController.GetComponent<PlayerMovement>().grounded);
 
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftShift))
         {
             m_Animator.SetBool("isRunning", false);
         }
-        if (playerController.GetComponent<FirstPersonAIO>().staminaInternal <= 0)
+        if (!playerController.GetComponent<PlayerMovement>().isSprinting)
         {
             m_Animator.SetBool("isRunning", false);
         }
