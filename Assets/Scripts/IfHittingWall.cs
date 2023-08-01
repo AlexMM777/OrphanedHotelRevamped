@@ -20,8 +20,14 @@ public class IfHittingWall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Hide"))
         {
-            //Debug.Log("false");
             playerBody.GetComponent<PlayerAnScript>().canMove = false;
+        }
+        else if (other.gameObject.GetComponent<CustomTag>() != null)
+        {
+            if (other.gameObject.GetComponent<CustomTag>().HasTag("Hide"))
+            {
+                playerBody.GetComponent<PlayerAnScript>().canMove = false;
+            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -30,6 +36,13 @@ public class IfHittingWall : MonoBehaviour
         {
             //Debug.Log("true");
             playerBody.GetComponent<PlayerAnScript>().canMove = true;
+        }
+        else if (other.gameObject.GetComponent<CustomTag>() != null)
+        {
+            if (other.gameObject.GetComponent<CustomTag>().HasTag("Hide"))
+            {
+                playerBody.GetComponent<PlayerAnScript>().canMove = true;
+            }
         }
     }
 

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class FootSteps : MonoBehaviour
 {
-    public GameObject playerController;
+    public GameObject playerController, playerBody;
     public AudioSource audioSource;
-    public AudioClip[] stoneSteps, grassSteps, dirtSteps, woodSteps;
-    public int stoneIndex, grassIndex, dirtIndex, woodChipIndex, woodIndex;
+    public AudioClip[] stoneSteps, grassSteps, dirtSteps, woodSteps, carpetSteps;
+    public int stoneIndex, grassIndex, dirtIndex, woodChipIndex, woodIndex, carpetIndex;
     public AudioClip[] chosenSounds;
     public bool isOnGround;
     public AudioClip finalChosen;
@@ -22,40 +22,46 @@ public class FootSteps : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isOnGround = playerController.GetComponent<Player>().onGround;
+        isOnGround = playerController.GetComponent<PlayerMovement>().grounded;
 
         if(!isOnObj) {
-            Debug.Log("Is on terrain");
-            if (playerController.GetComponent<FirstPersonAIO>().IsGrounded && isOnGround)
+            //Debug.Log("Is on terrain");
+            if (isOnGround)
             {
-                if (playerController.GetComponent<TerrainTextureDetector>().surfaceIndex == stoneIndex)
+                if (playerBody.GetComponent<TerrainTextureDetector>().surfaceIndex == stoneIndex)
                 {
                     //Debug.Log("Stone");
                     chosenSounds = stoneSteps;
                     ChooseRandom();
                 }
-                if (playerController.GetComponent<TerrainTextureDetector>().surfaceIndex == grassIndex)
+                if (playerBody.GetComponent<TerrainTextureDetector>().surfaceIndex == grassIndex)
                 {
                     //Debug.Log("Grass");
                     chosenSounds = grassSteps;
                     ChooseRandom();
                 }
-                if (playerController.GetComponent<TerrainTextureDetector>().surfaceIndex == dirtIndex)
+                if (playerBody.GetComponent<TerrainTextureDetector>().surfaceIndex == dirtIndex)
                 {
                     //Debug.Log("Dirt");
                     chosenSounds = dirtSteps;
                     ChooseRandom();
                 }
-                if (playerController.GetComponent<TerrainTextureDetector>().surfaceIndex == woodChipIndex)
+                if (playerBody.GetComponent<TerrainTextureDetector>().surfaceIndex == woodChipIndex)
                 {
                     //Debug.Log("WoodChip");
                     chosenSounds = grassSteps;
                     ChooseRandom();
                 }
-                if (playerController.GetComponent<TerrainTextureDetector>().surfaceIndex == woodIndex)
+                if (playerBody.GetComponent<TerrainTextureDetector>().surfaceIndex == woodIndex)
                 {
                     //Debug.Log("Wood");
                     chosenSounds = woodSteps;
+                    ChooseRandom();
+                }
+                if (playerBody.GetComponent<TerrainTextureDetector>().surfaceIndex == carpetIndex)
+                {
+                    //Debug.Log("Carpet");
+                    chosenSounds = carpetSteps;
                     ChooseRandom();
                 }
             }
@@ -69,4 +75,10 @@ public class FootSteps : MonoBehaviour
         finalChosen = chosenSounds[Random.Range(0, chosenSounds.Length)];
         //audioSource.Play();
     }
+
+    private void Step()
+    {
+        audioSource.PlayOneShot(finalChosen);
+    }
+
 }

@@ -35,7 +35,7 @@ public class EnemyAI : MonoBehaviour
         cooldownTime = 2;
         hideTimer = 0;
         isDead = false;
-        GetComponent<LookAtTarget>().enabled = false;
+        //GetComponent<LookAtTarget>().enabled = false;
     }
 
     void Update()
@@ -73,12 +73,12 @@ public class EnemyAI : MonoBehaviour
             if (sawPlayer == true)
             {
                 enemyNavMesh.SetDestination(playerTransform.position);
-                GetComponent<LookAtTarget>().enabled = true;
+                //GetComponent<LookAtTarget>().enabled = true;
             }
 
             if (sawPlayer == false)
             {
-                GetComponent<LookAtTarget>().enabled = false;
+                //GetComponent<LookAtTarget>().enabled = false;
                 outOfRange = true;
                 enemyNavMesh.SetDestination(waypoints[x].position);
             }
@@ -208,7 +208,7 @@ public class EnemyAI : MonoBehaviour
     {
         sounds[randomSound].Stop();
         enemyBody.GetComponent<EnemyAnScript>().m_walk = false;
-        GetComponent<LookAtTarget>().enabled = false;
+        //GetComponent<LookAtTarget>().enabled = false;
         diedSound.Play();
         yield return new WaitForSeconds(7);
         Destroy(enemy);

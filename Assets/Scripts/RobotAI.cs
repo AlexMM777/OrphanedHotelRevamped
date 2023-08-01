@@ -48,7 +48,7 @@ public class RobotAI : MonoBehaviour
     {
         yield return null;
         aI.GetComponent<AIScript>().message.text = "";
-        Destroy(robot.GetComponent<LookAtTarget>());
+        //Destroy(robot.GetComponent<LookAtTarget>());
         m_Animator.SetBool("isWalking", true);
         robotNavMesh.SetDestination(waypoints[x].position);
         yield return new WaitForSeconds(2);
