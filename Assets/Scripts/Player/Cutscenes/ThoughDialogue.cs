@@ -32,7 +32,7 @@ public class ThoughDialogue : MonoBehaviour
         {
             if (enableSomethingAfterDialogue && (latestBtnClicked == buttonWithActionReady))
             {
-                PossibleActions();
+                DoAction();
                 enableSomethingAfterDialogue = false;
             }
             else
@@ -44,12 +44,12 @@ public class ThoughDialogue : MonoBehaviour
         }
     }
 
-    private void PossibleActions()
+    public void DoAction()
     {
         //DisableObj and EnableObj
         if (actionSelector == 1)
         {
-            Debug.Log("Action");
+            //Debug.Log("Action");
             foreach (var obj in enableObj)
                 obj.SetActive(true);
             foreach (var obj in disableObj)
