@@ -22,7 +22,7 @@ public class SettingsButtonAI : MonoBehaviour
         //mainMenu.SetActive(true);
         //quit.SetActive(false);
         //settings.SetActive(false); 
-        CreateResDropdown();
+        //CreateResDropdown();
     }
 
     void Update()
@@ -30,7 +30,7 @@ public class SettingsButtonAI : MonoBehaviour
 
     }
 
-    public void CreateResDropdown()
+    /*public void CreateResDropdown()
     {
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
@@ -50,7 +50,7 @@ public class SettingsButtonAI : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
         graphics.value = PlayerPrefs.GetInt("GraphicQuality");
-    }
+    }*/
 
     public void LoadScene(string sceneToLoad)
     {
